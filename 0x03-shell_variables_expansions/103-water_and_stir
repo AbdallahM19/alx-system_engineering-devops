@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "The result is: $(echo "ibase=$water_base; obase=$bestchol_base; $WATER+$STIR" | bc)"
+printf "%o\n" $(( $((5#(echo $WATER | tr water 01234))) | printf "%o\n" $(( $((5#(echo $STIR | tr stir. 01234))) | printf "%d\n" "$bestchol"
