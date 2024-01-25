@@ -1,5 +1,5 @@
 #!/bin/bash
 # Write a Bash script that displays the visitor IP along with the HTTP status code from the Apache log file.
 
-file="apache-access.log"
-awk '{print $1, $9}' "$file"
+file=""
+awk -F' ' '{print $1, $9}' apache-access.log
