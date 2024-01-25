@@ -1,2 +1,9 @@
 #!/usr/bin/env bash
-# 0x04-loops_conditions_and_parsing
+# Write a Bash script that displays Best School 10 times.
+
+i=0
+until [ $i -eq 10 ]
+do
+    echo "Best School"
+    ((i++))
+done
