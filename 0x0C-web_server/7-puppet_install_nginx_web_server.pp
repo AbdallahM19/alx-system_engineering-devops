@@ -10,20 +10,20 @@ exec { 'install_system':
 }
 
 package { 'nginx':
-	ensure => 'installed',
-	require => Exec['install_system']
+    ensure  => 'installed',
+    require => Exec['install_system']
 }
 
 file {'/var/www/html/index.html':
-	content => 'Hello World!'
+    content => 'Hello World!'
 }
 
 exec {'redirect':
-	command => 'sed -i "24i\	rewrite ^/redirect https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
-	provider => 'shell'
+    command  => 'sed -i "24i\	rewrite ^/redirect https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
+    provider => 'shell'
 }
 
 service {'nginx':
-	ensure => running,
-	require => Package['nginx']
+    ensure  => running,
+    require => Package['nginx']
 }
