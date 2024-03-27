@@ -5,27 +5,25 @@
 # Your answer file should be a Puppet manifest
 # containing commands to automatically configure an Ubuntu machine to respect above requirements
 
-exec {'install':
-  command => 'sudo apt-get update',
+exec { 'install_system':
+    command => '/usr/bin/apt-get update',
 }
 
 package { 'nginx':
-  ensure  => 'installed',
-  require => Exec['install'],
+	ensure => 'installed',
+	require => Exec['install_system']
 }
 
-file { '/var/www/html/index.html':
-  ensure  => file,
-  content => "Hello World!\n",
+file {'/var/www/html/index.html':
+	content => 'Hello World!'
 }
 
-exec {'redirection':
-  command  => 'sed -i "24i\    rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
-  provider => shell,
+exec {'redirect':
+	command => 'sed -i "24i\	rewrite ^/redirect https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
+	provider => 'shell'
 }
 
-service { 'nginx':
-  ensure => running,
-  enable => package['nginx'],
+service {'nginx':
+	ensure => running,
+	require => Package['nginx']
 }
-
