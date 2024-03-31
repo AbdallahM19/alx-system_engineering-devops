@@ -13,7 +13,7 @@ file {'/var/www/html/index.html':
     content => 'Hello World!'
 }
 
--> header_line { 'add_custom_header':
+-> file_line { 'add_custom_header':
     path  => '/etc/nginx/nginx.conf',
     match => 'http {',
     line  => "http {\n\tadd_header X-Served-By \"${hostname}\";",
