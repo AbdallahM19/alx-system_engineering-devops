@@ -4,11 +4,21 @@
 sudo apt-get update -y -qq && \
 sudo apt-get install nginx -y
 
+echo "done nginx"
+
 sudo service nginx start
 
 sudo ufw allow 'Nginx HTTP'
-sudo chown -R "$USER":"$USER" /var/www/html
-sudo chmod -R 755 /var/www
+
+if [ -d "/var/www" ]; then
+	sudo chown -R "$USER":"$USER" /var/www
+	sudo chmod -R 755 /var/www
+else
+	sudo mkdir -p /var/www
+	sudo chown -R "$USER":"$USER" /var/www
+	sudo chmod -R 755 /var/www
+fi
+
 cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
 
 echo -e "Hello World!" > /var/www/html/index.nginx-debian.html
