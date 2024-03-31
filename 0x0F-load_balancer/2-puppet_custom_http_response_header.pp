@@ -16,9 +16,9 @@ file {'/var/www/html/index.html':
 -> header_line { 'add_custom_header':
     path  => '/etc/nginx/nginx.conf',
     match => 'http {',
-    line  => "http {\n\tadd_header X-Served-By \${hostname};",
+    line  => "http {\n\tadd_header X-Served-By \"${hostname}\";",
 }
 
 -> exec {'nginx_run':
-    command => '/usr/sbin/service nginx restart',
+    command => 'sudo service nginx restart',
 }
