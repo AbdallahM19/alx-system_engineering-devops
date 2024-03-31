@@ -15,17 +15,12 @@ package { 'nginx':
     require => Exec['install_system']
 }
 
-file { '/var/www/html/index.html':
+file {'/var/www/html/index.html':
     content => 'Hello World!'
 }
 
-exec { 'redirect':
-    command  => 'sed -i "27i\	rewrite ^/redirect https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
-    provider => 'shell'
-}
-
 exec { 'add_custom_header':
-    command  => 'sed -i \'26i\	add_header X-Served-By "$hostname";\' /etc/nginx/sites-available/default',
+    command  => 'sudo sed -i "26i\tadd_header X-Served-By \$hostname;" /etc/nginx/sites-available/default',
     provider => 'shell'
 }
 
