@@ -4,7 +4,7 @@ exec { 'update_system':
     command => '/usr/bin/apt-get update',
 }
 
-package { 'nginx':
+-> package { 'nginx':
     ensure  => 'present',
     require => Exec['update_system']
 }
@@ -13,12 +13,12 @@ file {'/var/www/html/index.html':
     content => 'Hello World!'
 }
 
-file_line { 'add_custom_header':
+-> file_line { 'add_custom_header':
     path  => '/etc/nginx/nginx.conf',
     match => 'http {',
     line  => "http {\n\ add_header X-Served-By \${hostname};",
 }
 
-exec {'nginx_run':
+-> exec {'nginx_run':
     command => '/usr/sbin/service nginx restart',
 }
