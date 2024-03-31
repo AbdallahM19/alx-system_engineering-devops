@@ -20,5 +20,5 @@ file {'/var/www/html/index.html':
 }
 
 -> exec {'nginx_run':
-    command => 'sudo service nginx restart',
+    command => '/usr/sbin/service nginx restart',
 }
