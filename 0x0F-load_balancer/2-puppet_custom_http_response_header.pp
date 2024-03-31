@@ -10,14 +10,13 @@ package { 'nginx':
 }
 
 file {'/var/www/html/index.html':
-	content => 'Hello World!'
+    content => 'Hello World!'
 }
 
 file_line { 'add_custom_header':
-    path     => '/etc/nginx/nginx.conf',
-    ensure   => 'present',
-    match    => 'http {',
-    line     => "http {\n\  add_header X-Served-By "${hostname}";"
+    path  => '/etc/nginx/nginx.conf',
+    match => 'http {',
+    line  => "http {\n\  add_header X-Served-By \"${hostname}\";"
 }
 
 exec { 'nginx_run':
