@@ -6,18 +6,14 @@
 # that will display information about subdomains.
 
 display_info() {
-    script=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
-    echo "$2 $script" | awk '{print "The subdomain " $1 " is a " $2 " record and points to " $3}'
+    dig "$1" | grep -A1 'ANSWER SECTION:' | sed -r "s/$1./$2/g" | awk -F" " ' NR==2 { print "The subdomain " $1 " is a " $4 " record and points to " $5 }'
 }
 
-domain=$1
-subdomain=$2
-
-if [ "$#" == 1 ]; then
-    display_info "$domain": "www"
-    display_info "$domain": "lb-01"
-    display_info "$domain": "web-01"
-    display_info "$domain": "web-02"
-elif [ "$#" == 2 ]; then
-    display_info "$domain" "$subdomain"
+if [ "$#" -eq 2 ]; then
+    display_info "$2.$1" "$2"
+else
+    display_info "www.$1" "www"
+    display_info "lb-01.$1" "lb-01"
+    display_info "web-01.$1" "web-01"
+    display_info "web-02.$1" "web-02"
 fi
