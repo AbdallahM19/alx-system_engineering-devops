@@ -1,0 +1,13 @@
+echo -e 'installing firewall ...\n'
+sudo apt-get -y update
+echo -e 'Done updateing\n'
+sudo apt-get install -y ufw
+echo -e 'configuring ufw ...\n'
+sudo ufw --force disable
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 80/tcp
+sudo ufw --force enable
+echo -e 'Done installing.\n'
