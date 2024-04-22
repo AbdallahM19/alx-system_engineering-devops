@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """Write a Python script that, using this REST API"""
-
+import json
 import requests
 import sys
-import json
+
 
 def get_employee_todo_progress(id):
     url = "https://jsonplaceholder.typicode.com/users"
