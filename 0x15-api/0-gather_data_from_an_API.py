@@ -6,7 +6,7 @@ import sys
 
 
 def get_employee_todo_progress(id):
-    url = "https://jsonplaceholder.typicode.com/users/"
+    url = "https://jsonplaceholder.typicode.com/users"
     url_id = url + "/{}".format(id)
     url_todos = url_id + '/todos'
     response_url_id = requests.get(url_id)
