@@ -12,10 +12,10 @@ def number_of_subscribers(subreddit):
     if subreddit is None or type(subreddit) is not str:
         return 0
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    header_Agent = {"User-Agent": "Brave version 1.65.126"}
-    x = get(url, headers=header_Agent)
+    headers = {"User-Agent": "Brave version 1.65.126"}
+    x = get(url, headers=headers)
     i = x.json()
     try:
-        return i['data']['subscribers']
+        return i.get('data').get('subscribers')
     except Exception:
         return 0
