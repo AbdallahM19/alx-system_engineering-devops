@@ -22,4 +22,4 @@ def number_of_subscribers(subreddit):
         return 0
     else:
         results = reponse.json()
-        return results['data']['subscribers']
+        return results["data"]["subscribers"]
