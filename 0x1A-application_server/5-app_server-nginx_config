@@ -28,12 +28,12 @@ server {
                 proxy_pass http://0.0.0.0:5003/2-hbnb;
         }
 
-        location /static {
-                proxy_pass http://0.0.0.0:5003;
+        location / {
+                proxy_pass http://0.0.0.0:5003/2-hbnb;
         }
 
-        location /hbnb_static/ {
-                alias /data/web_static/current/;
+        location /static/ {
+                root /home/ubuntu/projects/AirBnB_clone_v4/web_dynamic;
         }
 
         # location /404 {
