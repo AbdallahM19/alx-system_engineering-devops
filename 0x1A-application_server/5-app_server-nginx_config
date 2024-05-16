@@ -2,13 +2,13 @@ server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
+        server_name _;
+
         add_header X-Served-By "$hostname";
         rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
         error_page 404 /error_404.html;
         root /var/www/html;
         index index.html index.htm index.nginx-debian.html;
-
-        server_name _;
 
         location /airbnb-onepage/ {
                 proxy_pass http://127.0.0.1:5000/airbnb-onepage;
@@ -23,12 +23,12 @@ server {
         }
 
         location / {
-                proxy_pass http://127.0.0.1:5003;
+                proxy_pass http://127.0.0.1:5003/2-hbnb;
         }
 
-        location /static/ {
+        location /static {
                 proxy_pass http://127.0.0.1:5003;
-                alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/;
+                alias web_dynamic/static/;
         }
 
         location /hbnb_static/ {
