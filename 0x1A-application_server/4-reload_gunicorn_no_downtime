@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 # to reload Gunicorn in a graceful way
-sudo pkill -HUP -f gunicorn.*master
+#shellcheck disable=SC2009
+ps aux | grep gunicorn | awk '{ print $2 }' | xargs kill -HUP
