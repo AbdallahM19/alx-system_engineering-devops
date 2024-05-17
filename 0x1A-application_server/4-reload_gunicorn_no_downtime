@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # to reload Gunicorn in a graceful way
 
-pkill -HUP gunicorn
+sudo pkill -HUP gunicorn
 
